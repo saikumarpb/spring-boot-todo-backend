@@ -1,7 +1,7 @@
 package com.backend.todo.service.impl
 
-import com.backend.todo.dto.ResponseTodoListDTO
-import com.backend.todo.dto.TodoItem
+import com.backend.todo.dto.TodoListResponseDTO
+import com.backend.todo.dto.TodoItemDTO
 import com.backend.todo.model.Todo
 import com.backend.todo.repository.TodoRepositorty
 import com.backend.todo.service.TodoService
@@ -12,17 +12,17 @@ class TodoServiceImpl(
   private val todoRepositorty: TodoRepositorty
 ) : TodoService {
 
-  override fun findAll(): ResponseTodoListDTO {
+  override fun findAll(): TodoListResponseDTO {
     val data = todoRepositorty.findAll() as List<Todo>
-    val responseTodoList: ResponseTodoListDTO = ResponseTodoListDTO(
+    val responseTodoList: TodoListResponseDTO = TodoListResponseDTO(
       mutableListOf(),
       mutableListOf()
     )
     data.forEach { item ->
       if (item.isPending) {
-        responseTodoList.pending.add(TodoItem(item.id, item.text))
+        responseTodoList.pending.add(TodoItemDTO(item.id, item.text))
       } else {
-        responseTodoList.completed.add(TodoItem(item.id, item.text))
+        responseTodoList.completed.add(TodoItemDTO(item.id, item.text))
       }
     }
     return responseTodoList

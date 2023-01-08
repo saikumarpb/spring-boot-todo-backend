@@ -1,10 +1,10 @@
 package com.backend.todo.service
 
-import com.backend.todo.dto.ResponseTodoListDTO
+import com.backend.todo.dto.TodoListResponseDTO
 import com.backend.todo.model.Todo
 
 interface TodoService {
-  fun findAll(): ResponseTodoListDTO
+  fun findAll(): TodoListResponseDTO
   fun saveTodoItem(item:Todo)
   fun deleteTodoItem(id:Long)
 }
