@@ -7,11 +7,11 @@ To run this application, follow the below steps
 
 2. clone the backend git repository from https://github.com/saikumarpb/spring-boot-todo-backend
 
-3. Instructions to setup frontend repository are mentioned in the [Readme.md](https://github.com/saikumarpb/todo-react/blob/master/Readme.md) file in the frontend repository. Follow the instructions and complete the frontend setup successfully.
+3. Instructions to setup frontend repository are mentioned in the [Readme.md](https://github.com/saikumarpb/todo-react#readme) file in the frontend repository. Follow the instructions and complete the frontend setup successfully.
 
 4. The configuration file for this application is located at `src\main\resources\application.properties`
 
-5. This application uses `postgres` as database. if you have an existing postgres service available update database configuration such as `database url`,`port`,`databse name`,`username`,`password` in **DATABASE PROPERTIES** section of the `application.properties` file and proceed from step 7.
+5. This application uses `postgres` as database. if you have an existing postgres service available update database configuration such as _database url, port, databse name, username, password_ in **DATABASE PROPERTIES** section of the `application.properties` file and proceed from step 7.
 
 6. if existing `postgres` service is not available, (assuming docker/docker desktop is available in your machine) open terminal project folder and execute `docker-compose up -d` command.
 
@@ -29,3 +29,54 @@ To run this application, follow the below steps
 11. Now setup is completed. run the application. Tomcat should start on port specified in application.properties file (Port: 8000). backend is available at http://localhost:8000 
 
 12. Add the backend url in frontend application to connect to backend and run the frontend application.
+
+#### Available API's
+1. Get Todolist API 
+<pre>
+Request : curl --location --request GET 'http://localhost:8000/todolist/'`
+Response : 
+{
+    "pending": [
+        {
+            "id": 1,
+            "text": "test task desciption"
+        }
+    ],
+    "completed": [
+        {
+            "id": 2,
+            "text": "completed task desciption"
+        }
+    ]
+}
+</pre>
+
+2. Post Task API (create/update a task/todo)
+<pre>
+curl --location --request POST 'http://localhost:8000/todolist/post' \
+   --header 'Content-Type: application/json' \
+   --data-raw '{
+   "id": 1,
+   "text": "test task desciption",
+   "isPending": true
+   }'`
+</pre>
+
+3. Delete task API
+<pre>
+curl --location --request DELETE 'http://localhost:8000/todolist/delete/1'
+</pre>
+
+#### Database
+- Todo is a very basic and simple CRUD application with add,edit,delete functionality.
+- DB contains a single table `todo`
+<pre>
+                         Table "public.todo"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ id         | bigint                 |           | not null |
+ is_pending | boolean                |           | not null |
+ text       | character varying(255) |           |          |
+Indexes:
+    "todo_pkey" PRIMARY KEY, btree (id)
+</pre>
