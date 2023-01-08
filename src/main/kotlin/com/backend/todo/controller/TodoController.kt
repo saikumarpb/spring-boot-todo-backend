@@ -4,7 +4,6 @@ import com.backend.todo.dto.TodoListResponseDTO
 import com.backend.todo.model.Todo
 import com.backend.todo.routes.Routes
 import com.backend.todo.service.TodoService
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
